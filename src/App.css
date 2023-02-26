@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+
 }
 
 .app {
@@ -9,26 +10,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #312e2b;
 }
 
 .board {
-    width: calc(64px * 8);
-    height: calc(64px * 8);
+    width: calc(74px * 8);
+    height: calc(74px * 8);
     display: flex;
     flex-wrap: wrap;
 }
 
 .cell {
-    width: 64px;
-    height: 64px;
+    width: 74px;
+    height: 74px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .cell img {
-    width: 55px;
-    height: 55px;
+    width: 70px;
+    height: 70px;
     position: relative;
 }
 
@@ -41,19 +43,70 @@
 }
 
 .selected {
-    background-color: brown;
+    background-color: #ffef25;
 }
 
 .available {
     height: 12px;
     width: 12px;
     border-radius: 50%;
-    background-color: green;
+    background-color: #40c240;
 }
 
 .lost {
-    height: calc(50vh - 60px);
+    height: 236px;
     padding: 30px;
-    margin-left: 50px;
     background-color: lightgray;
+}
+.lostWrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    height: 15px;
+    width: 80px;
+
+}
+.timerWrapper{
+    height: 532px;
+    padding: 30px;
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeWrap{
+    display: flex;
+    /*border: 2px solid;*/
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.timeWrap img{
+    margin-right: 15px;
+}
+
+.time{
+    font-weight: bold;
+    font-size: 23px;
+    color: #b787b7;
+}
+
+button{
+    padding: 10px 10px;
+    margin-top: 170px;
+    margin-bottom: 170px;
+    background-color: #eec2ee;
+    color: #803a80;
+    border: 1px solid #5e0f5e;
+    font-weight: bold;
+}
+
+.title{
+    font-weight: bold;
+    color: #803a80;
+    font-size: 25px;
 }

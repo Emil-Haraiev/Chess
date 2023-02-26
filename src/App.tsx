@@ -31,10 +31,12 @@ const App = () => {
 
     return (
         <div className="app">
-            <Timer
-                restart={restart}
-                currentPlayer={currentPlayer}
-            />
+            <div className='timerWrapper'>
+                <Timer
+                    restart={restart}
+                    currentPlayer={currentPlayer}
+                />
+            </div>
             <BoardComponent
                 board={board}
                 setBoard={setBoard}
@@ -43,11 +45,11 @@ const App = () => {
             />
             <div>
                 <LostFigures
-                    title="Черные фигуры"
+                    title="Black figures"
                     figures={board.lostBlackFigures}
                 />
                 <LostFigures
-                    title="Белые фигуры"
+                    title="White figures"
                     figures={board.lostWhiteFigures}
                 />
             </div>
