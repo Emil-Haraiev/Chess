@@ -6,11 +6,14 @@ import {Player} from "./modules/Player";
 import {Colors} from "./modules/Colors";
 import LostFigures from "./components/LostFigures";
 import Timer from "./components/Timer";
+import TimeIsOver from "./components/TimeIsOver";
 
 const App = () => {
     const [board, setBoard] = useState(new Board())
     const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE))
     const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK))
+    const [isTimeOver, setIsTimeOver] = useState(false)
+    const [winner, setWinner] = useState(null)
     const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
 
     useEffect(() => {
@@ -31,8 +34,13 @@ const App = () => {
 
     return (
         <div className="app">
+            {isTimeOver && (
+               <TimeIsOver restart={restart}/>
+            )}
             <div className='timerWrapper'>
                 <Timer
+                    isTimeOver={isTimeOver}
+                    setIsTimeOver={setIsTimeOver}
                     restart={restart}
                     currentPlayer={currentPlayer}
                 />

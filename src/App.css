@@ -95,7 +95,7 @@
     color: #b787b7;
 }
 
-button{
+.mainButton{
     padding: 10px 10px;
     margin-top: 170px;
     margin-bottom: 170px;
@@ -109,4 +109,29 @@ button{
     font-weight: bold;
     color: #803a80;
     font-size: 25px;
+}
+
+.modal{
+    position: absolute;
+    z-index: 100;
+    top: 200px;
+    right: 615px;
+    border-radius: 20px;
+    background-color: #40c240;
+    padding: 30px 50px;
+}
+
+.modalTittle{
+    font-weight: bold;
+    color: #803a80;
+    font-size: 35px;
+    margin-bottom: 30px;
+}
+
+.modalButton{
+    display: block;
+    margin: 20px auto;
+}
+.modalWinner{
+    text-align: center;
 }
