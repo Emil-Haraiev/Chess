@@ -13,7 +13,9 @@ const App = () => {
     const [whitePlayer, setWhitePlayer] = useState(new Player(Colors.WHITE))
     const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK))
     const [isTimeOver, setIsTimeOver] = useState(false)
-    const [winner, setWinner] = useState(null)
+    const [winner, setWinner] = useState('')
+    const [blackTime, setBlackTime] = useState(10);
+    const [whiteTime, setWhiteTime] = useState(10);
     const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
 
     useEffect(() => {
@@ -31,17 +33,50 @@ const App = () => {
     function swapPlayer() {
         setCurrentPlayer(currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer)
     }
+    const handleRestart = () => {
+        setWhiteTime(10);
+        setBlackTime(10);
+        setIsTimeOver(false);
+        restart()
+    }
+
+    function decrementBlackTimer() {
+        setBlackTime((prev: number) => {
+            if (prev <= 0) {
+                setIsTimeOver(true);
+                setWinner('White')
+                return 0;
+            }
+            return prev - 1;
+        });
+    }
+
+    function decrementWhiteTimer() {
+        setWhiteTime((prev: number) => {
+            if (prev <= 0) {
+                setIsTimeOver(true);
+                setWinner('Black')
+                return 0;
+            }
+            return prev - 1;
+        });
+    }
 
     return (
         <div className="app">
             {isTimeOver && (
-               <TimeIsOver restart={restart}/>
+               <TimeIsOver winner={winner} handleRestart={handleRestart}  restart={restart}/>
             )}
             <div className='timerWrapper'>
                 <Timer
-                    isTimeOver={isTimeOver}
+                    decrementBlackTimer={decrementBlackTimer}
+                    decrementWhiteTimer={decrementWhiteTimer}
+                    handleRestart={handleRestart}
+                    blackTime={blackTime}
+                    setBlackTime={setBlackTime}
+                    whiteTime={whiteTime}
+                    setWhiteTime={setWhiteTime}
                     setIsTimeOver={setIsTimeOver}
-                    restart={restart}
                     currentPlayer={currentPlayer}
                 />
             </div>

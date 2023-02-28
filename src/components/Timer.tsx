@@ -1,19 +1,34 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
+import {MouseEventHandler} from "react";
 import {Player} from "../modules/Player";
 import {Colors} from "../modules/Colors";
 import time from '../assets/time.png';
+
+
 interface TimerProps {
     currentPlayer: Player | null;
-    restart: () => void;
-    isTimeOver: boolean;
     setIsTimeOver: Function;
+    blackTime: number;
+    whiteTime: number;
+    setBlackTime: Function;
+    setWhiteTime: Function;
+    handleRestart: MouseEventHandler<HTMLButtonElement>;
+    decrementWhiteTimer: Function;
+    decrementBlackTimer: Function;
+
 }
 
-const Timer: FC<TimerProps> = ({currentPlayer, restart, isTimeOver, setIsTimeOver}) => {
-    const [blackTime, setBlackTime] = useState(10);
-    const [whiteTime, setWhiteTime] = useState(10);
+const Timer: FC<TimerProps> = ({
+                                   currentPlayer,
+                                   decrementWhiteTimer,
+                                   decrementBlackTimer,
+                                   blackTime,
+                                   whiteTime,
+                                   handleRestart
+                               }) => {
 
-    const timer = useRef<null | ReturnType<typeof setTimeout>>(null);
+
+    const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     useEffect(() => {
         startTimer();
@@ -24,35 +39,7 @@ const Timer: FC<TimerProps> = ({currentPlayer, restart, isTimeOver, setIsTimeOve
             clearTimeout(timer.current);
         }
         const callback = currentPlayer?.color === Colors.WHITE ? decrementWhiteTimer : decrementBlackTimer;
-        timer.current = setTimeout(callback, 1000);
-    }
-
-    function decrementBlackTimer() {
-        setBlackTime(prev => {
-            if (prev <= 0) {
-                setIsTimeOver(true);
-                return 0;
-            }
-            return prev - 1;
-        });
-    }
-
-    function decrementWhiteTimer() {
-        setWhiteTime(prev => {
-            if (prev <= 0) {
-                setIsTimeOver(true);
-                return 0;
-            }
-            return prev - 1;
-        });
-    }
-
-
-    const handleRestart = () => {
-        setWhiteTime(10);
-        setBlackTime(10);
-        setIsTimeOver(false);
-        restart()
+        timer.current = setTimeout(callback, 1000) as any;
     }
 
     const blackMinutes = Math.floor(blackTime / 60);
@@ -69,14 +56,6 @@ const Timer: FC<TimerProps> = ({currentPlayer, restart, isTimeOver, setIsTimeOve
 
     return (
         <div>
-            {/*{isTimeOver && (*/}
-            {/*    <div className='modal'>*/}
-            {/*        <div className='modal-content'>*/}
-            {/*            <h2>Time is up!</h2>*/}
-            {/*            <button onClick={handleRestart}>Restart game</button>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*)}*/}
             <div>
                 <div className='title'>Black's move</div>
                 <div className='timeWrap'>
@@ -88,7 +67,7 @@ const Timer: FC<TimerProps> = ({currentPlayer, restart, isTimeOver, setIsTimeOve
                 <button className='mainButton' onClick={handleRestart}>Restart game</button>
             </div>
             <div>
-                <div className='title' >White's move</div>
+                <div className='title'>White's move</div>
                 <div className='timeWrap'>
                     <img src={time} alt="time"/>
                     <div className='time'>{formatTime(whiteMinutes, whiteSeconds)}</div>
