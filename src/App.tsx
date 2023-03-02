@@ -14,8 +14,8 @@ const App = () => {
     const [blackPlayer, setBlackPlayer] = useState(new Player(Colors.BLACK))
     const [isTimeOver, setIsTimeOver] = useState(false)
     const [winner, setWinner] = useState('')
-    const [blackTime, setBlackTime] = useState(10);
-    const [whiteTime, setWhiteTime] = useState(10);
+    const [blackTime, setBlackTime] = useState(600);
+    const [whiteTime, setWhiteTime] = useState(600);
     const [currentPlayer, setCurrentPlayer] = useState<Player | null>(null);
 
     useEffect(() => {
@@ -34,8 +34,8 @@ const App = () => {
         setCurrentPlayer(currentPlayer?.color === Colors.WHITE ? blackPlayer : whitePlayer)
     }
     const handleRestart = () => {
-        setWhiteTime(10);
-        setBlackTime(10);
+        setWhiteTime(600);
+        setBlackTime(600);
         setIsTimeOver(false);
         restart()
     }

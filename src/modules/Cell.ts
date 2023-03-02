@@ -19,6 +19,7 @@ export class Cell {
         this.board = board;
         this.available = false;
         this.id = Math.random()
+
     }
 
     isEmpty(): boolean {
